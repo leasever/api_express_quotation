@@ -7,13 +7,14 @@ const router = Router();
 
 const cleanFileName = (filename: string) => {
   const file = filename.split(".").shift();
+  console.log(file);
   return file;
 };
 
 readdirSync(PATH_ROUTER).filter((filename) => {
   const cleanName = cleanFileName(filename);
   if (cleanName !== "index") {
-    import(`./${cleanName}`).then((moduleRouter) => {
+    import(`./${cleanName}.route`).then((moduleRouter) => {
       console.log(`Se está cargando la ruta... /${cleanName}`);
       router.use(`/api/${cleanName}`, moduleRouter.router);
     });
