@@ -6,17 +6,19 @@ import {
   postProduct,
   updateProduct,
 } from "../contollers/product.controller";
+import { logMiddleware } from "../middleware/log.middleware";
+import { checkJwt } from "../middleware/session.middleware";
 
 const router = Router();
 
-router.get("/", getProducts);
+router.get("/", logMiddleware, getProducts);
 
 router.get("/:id", getProduct);
 
 router.post("/", postProduct);
 
-router.put("/:id", updateProduct);
+router.put("/:id", checkJwt, updateProduct);
 
-router.delete("/:id", deleteProduct);
+router.delete("/:id", checkJwt, deleteProduct);
 
 export { router };

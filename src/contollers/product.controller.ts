@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { handleHttp } from "../utils/error.handle";
 import {
+  deleteItem,
   getItem,
   getItems,
   insertItem,
   updateItem,
-  deleteItem,
 } from "../services/product.service";
+import { handleHttp } from "../utils/error.handle";
+import { RequestExt } from "../interfaces/user.interface";
 
 const getProducts = async (_req: Request, res: Response) => {
   try {
@@ -36,11 +37,14 @@ const postProduct = async ({ body }: Request, res: Response) => {
   }
 };
 
-const updateProduct = async ({ params, body }: Request, res: Response) => {
+const updateProduct = async (
+  { params, body, user }: RequestExt,
+  res: Response
+) => {
   try {
     const { id } = params;
     const response = await updateItem(id, body);
-    res.send(response);
+    res.send({ data: response, user: user });
   } catch (e) {
     handleHttp(res, "ERROR_UPDATE_PRODUCT", e);
   }
