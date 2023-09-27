@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
+import { getItems, insertItem } from "../services/product.service";
 
-const getProducts = (req: Request, res: Response) => {
+const getProducts = async (_req: Request, res: Response) => {
   try {
+    const responseItems = await getItems();
+    res.send(responseItems);
   } catch (e) {
-    handleHttp(res, "ERROR_GET_PRODUCTS");
+    handleHttp(res, "ERROR_GET_PRODUCTS", e);
   }
 };
 
@@ -15,11 +18,12 @@ const getProduct = (req: Request, res: Response) => {
   }
 };
 
-const insertProduct = ({ body }: Request, res: Response) => {
+const postProduct = async ({ body }: Request, res: Response) => {
   try {
-    res.send(body);
+    const responseItem = await insertItem(body);
+    res.send(responseItem);
   } catch (e) {
-    handleHttp(res, "ERROR_INSERT_PRODUCT");
+    handleHttp(res, "ERROR_POST_PRODUCT", e);
   }
 };
 
@@ -37,4 +41,4 @@ const deleteProduct = (req: Request, res: Response) => {
   }
 };
 
-export { deleteProduct, getProduct, getProducts, insertProduct, updateProduct };
+export { deleteProduct, getProduct, getProducts, postProduct, updateProduct };

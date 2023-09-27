@@ -3,7 +3,7 @@ import {
   deleteProduct,
   getProduct,
   getProducts,
-  insertProduct,
+  postProduct,
   updateProduct,
 } from "../contollers/product.controller";
 
@@ -13,7 +13,7 @@ router.get("/", getProducts);
 
 router.get("/:id", getProduct);
 
-router.post("/", insertProduct);
+router.post("/", postProduct);
 
 router.put("/:id", updateProduct);
 

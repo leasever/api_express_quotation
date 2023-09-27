@@ -1,9 +1,12 @@
-export interface Car {
+export interface Product {
   name: string;
   description: string;
   price: number;
   categories: object[];
-  thumbnail: string[];
-  image: string[];
+  thumbnail: object[];
+  image: object[];
   rating: number;
+  marca: object;
+  sizes: object[];
+  stock: number;
 }
