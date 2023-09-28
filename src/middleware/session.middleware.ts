@@ -11,7 +11,6 @@ const checkJwt = (req: RequestExt, res: Response, next: NextFunction) => {
     const jwtByUser = req.headers.authorization || "";
     const jwt = jwtByUser.split(" ").pop();
     const user = verifyToken(`${jwt}`);
-    console.log(user);
     if (!user) {
       res.status(401);
       res.send("TOKEN_INVALID");
