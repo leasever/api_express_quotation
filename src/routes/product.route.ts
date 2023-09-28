@@ -5,7 +5,7 @@ import {
   getProducts,
   postProduct,
   updateProduct,
-} from "../contollers/product.controller";
+} from "../controllers/product.controller";
 import { logMiddleware } from "../middleware/log.middleware";
 import { checkJwt } from "../middleware/session.middleware";
 
